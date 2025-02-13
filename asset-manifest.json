@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/Ngum12/linkbot.git/static/css/main.92c8d4eb.css",
+    "main.js": "/Ngum12/linkbot.git/static/js/main.c241ccbb.js",
+    "static/js/146.06cc155a.chunk.js": "/Ngum12/linkbot.git/static/js/146.06cc155a.chunk.js",
+    "index.html": "/Ngum12/linkbot.git/index.html",
+    "main.92c8d4eb.css.map": "/Ngum12/linkbot.git/static/css/main.92c8d4eb.css.map",
+    "main.c241ccbb.js.map": "/Ngum12/linkbot.git/static/js/main.c241ccbb.js.map",
+    "146.06cc155a.chunk.js.map": "/Ngum12/linkbot.git/static/js/146.06cc155a.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.92c8d4eb.css",
+    "static/js/main.c241ccbb.js"
+  ]
+}
