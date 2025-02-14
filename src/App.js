@@ -19,27 +19,24 @@ export default function LinkLibraryChatbot() {
   const [searchTerm, setSearchTerm] = useState('');
   const [isOpen, setIsOpen] = useState(true);
   const [newLink, setNewLink] = useState('');
+  const [newTitle, setNewTitle] = useState('');
 
-  const filteredLinks = links[selectedCategory].filter(link =>
-    link.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredLinks = links[selectedCategory].filter(({ title }) =>
+    title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const handleDragEnd = (event, info) => {
     setPosition({ x: info.point.x, y: info.point.y });
   };
 
-  const addLink = (link) => {
-    setLinks(prevLinks => ({
-      ...prevLinks,
-      [selectedCategory]: [...prevLinks[selectedCategory], link]
-    }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (newLink) {
-      addLink(newLink);
+  const addLink = () => {
+    if (newLink && newTitle) {
+      setLinks(prevLinks => ({
+        ...prevLinks,
+        [selectedCategory]: [...prevLinks[selectedCategory], { title: newTitle, url: newLink }]
+      }));
       setNewLink('');
+      setNewTitle('');
     }
   };
 
@@ -71,28 +68,35 @@ export default function LinkLibraryChatbot() {
             </select>
             <input
               type="text"
-              placeholder="Search links..."
+              placeholder="Search by title..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="w-full p-2 rounded-md border"
             />
-            <form onSubmit={handleSubmit} className="flex gap-2">
+            <div className="flex gap-2">
+              <input
+                type="text"
+                value={newTitle}
+                onChange={(e) => setNewTitle(e.target.value)}
+                placeholder="Enter link title..."
+                className="w-full p-2 rounded-md border"
+              />
               <input
                 type="text"
                 value={newLink}
                 onChange={(e) => setNewLink(e.target.value)}
-                placeholder="Add new link..."
+                placeholder="Enter link URL..."
                 className="w-full p-2 rounded-md border"
               />
-              <button type="submit" className="px-4 py-2 bg-blue-500 text-white rounded-md">
+              <button onClick={addLink} className="px-4 py-2 bg-blue-500 text-white rounded-md">
                 Add
               </button>
-            </form>
+            </div>
             <ul className="space-y-2">
               {filteredLinks.length > 0 ? (
-                filteredLinks.map((link, index) => (
+                filteredLinks.map(({ title, url }, index) => (
                   <li key={index} className="text-blue-500 underline cursor-pointer">
-                    <a href={link} target="_blank" rel="noopener noreferrer">{link}</a>
+                    <a href={url} target="_blank" rel="noopener noreferrer">{title}</a>
                   </li>
                 ))
               ) : (
